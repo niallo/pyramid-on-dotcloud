@@ -1,6 +1,7 @@
-from paste.httpserver import serve
+from pyramid.scripts.pserve import cherrypy_server_runner
 from pyramid.config import Configurator
 from pyramid.response import Response
+from zope.interface import implements
 
 def dump_environ(request):
     return Response(
@@ -14,4 +15,4 @@ config.add_view(dump_environ, route_name='dump_environ')
 application = config.make_wsgi_app()
 
 if __name__ == '__main__':
-    serve(application, host='0.0.0.0')
+    cherrypy_server_runner(application, host='0.0.0.0')
